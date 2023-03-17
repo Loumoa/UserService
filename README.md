@@ -2,6 +2,19 @@
 
 Le UserService possède une architecture Domain Driven Design (DDD)
 
+# Démarrage de l'application
+
+Après avoir installé ruby dans l'environnement : lancer un `bundle install` dans le terminal pour installer les dépendances.
+
+Les commandes suivantes sont à disposition pour build et run l'application : 
+
+- ``rake db:create`` : Créer la base de données
+- ``rake db:migrate`` : Exécuter les migrations de la base de données
+- ``rake db:rollback`` : Annuler la dernière migration
+- ``rake db:seed`` : Charger les données initiales dans la base de données (si vous avez un fichier db/seeds.rb)
+- ``rake start`` : Démarrer l'application
+- ``rake test`` : Exécuter les tests (si vous utilisez RSpec)
+
 ## Arborescence :
 ```
 UserService/

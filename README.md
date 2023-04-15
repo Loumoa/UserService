@@ -149,3 +149,9 @@ Le dossier interfaces contient les éléments liés aux interfaces utilisateur d
     - ``api_docs.yml`` : Ce fichier contient la spécification de l'API au format OpenAPI, qui décrit les points de terminaison, les paramètres, les réponses et les schémas de l'API.
 
     - ``config.ru`` : Ce fichier de configuration Rack charge la documentation Swagger, configure les middlewares nécessaires et sert l'interface utilisateur Swagger.
+
+
+GEM NEED :
+
+gem install sinatra
+gem install pg

@@ -32,8 +32,7 @@ Ce projet est un micro service simple basé sur Sinatra pour gérer les utilisat
 
 1. Cloner ce dépôt
 2. Installer les dépendances : `bundle install`
-3. Lancer l'application : ruby App.rb
-
+3. Lancer l'application : `ruby App.rb`
 
 ## Routes API
 

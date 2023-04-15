@@ -9,6 +9,11 @@ Ce projet est un micro service simple basé sur Sinatra pour gérer les utilisat
 ├── App.rb
 ├── README.md
 ├── application
+├── Gemfile
+├── RakeFile
+├──spec
+│ ├── spec_helper.rb
+│ ├── user_entrypoint_spec.rb
 │ ├── entry_point
 │ │ └── user_entrypoint.rb
 │ └── service
@@ -23,6 +28,10 @@ Ce projet est un micro service simple basé sur Sinatra pour gérer les utilisat
 ## Fichiers
 
 - `App.rb` : Le point d'entrée principal de l'application Sinatra.
+- `Gemfile` : Contient la liste des dépendances nécessaire au fonctionnement de l'application
+- `Rakefile` : est utilisé pour définir des tâches Rake pour le projet. Rake est un outil de construction en Ruby qui permet d'automatiser certaines tâches, comme l'exécution des tests.
+- `spec_helper.rb` : Est utilisé pour configurer et initialiser l'environnement de test pour le projet.
+- `user_entrypoint_spec.rb` : Contient les tests pour les points d'entrée du micro-service utilisateur.
 - `application/entry_point/user_entrypoint.rb` : Les points d'accès de l'API pour les utilisateurs.
 - `application/service/users_service.rb` : Les services pour gérer les utilisateurs.
 - `domain/entity/user.rb` : L'entité User.
@@ -41,3 +50,7 @@ Ce projet est un micro service simple basé sur Sinatra pour gérer les utilisat
 - `POST /users` : Ajouter un nouvel utilisateur
 - `PUT /users/:id` : Mettre à jour un utilisateur existant par ID
 - `DELETE /users/:id` : Supprimer un utilisateur par ID
+
+## Tests avec Rake
+
+Les tests des entrypoints sont situés dans le fichier `user_entrypoint_spec.rb`, on peut les exécuter avec rake à l'aide de la commande `bundle exec rake spec`

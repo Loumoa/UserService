@@ -9,41 +9,41 @@ class UserRepository
 
   def self.add(param)
     conn = connect
-    result = conn.exec("INSERT INTO users (name, user_type, email, password, phone) VALUES (#{params[:name]}, #{params[:user_type]}, #{params[:email]}, #{params[:password]}, #{params[:phone]}) RETURNING id")
-    id = result[0]['id'].to_i
-    user = User.new(id, param[:name], param[:user_type], param[:email], param[:password], param[:phone])
+    result = conn.exec_params("INSERT INTO utilisateur (prénom, nom, mail, motDePasse, adresse) VALUES ($1, $2, $3, $4, $5) RETURNING idUtilisateur", [param[:prenom], param[:nom], param[:mail], param[:motDePasse], param[:adresse]])
+    id = result[0]['idUtilisateur'].to_i
+    user = User.new(id, param[:prenom], param[:nom], param[:mail], param[:motDePasse], param[:adresse])
     conn.close
     user
   end
 
   def self.get_all
     conn = connect
-    result = conn.exec('SELECT * FROM users')
-    users = result.map { |row| User.new(row['id'].to_i, row['name'], row['user_type'], row['email'], row['password'], row['phone']) }
+    result = conn.exec('SELECT * FROM utilisateur')
+    users = result.map { |row| User.new(row['idUtilisateur'].to_i, row['prénom'], row['nom'], row['mail'], row['motDePasse'], row['adresse']) }
     conn.close
     users.map(&:to_hash)
   end
 
   def self.get(id)
     conn = connect
-    result = conn.exec("SELECT * FROM users WHERE id = #{id}")
-    user = result.map { |row| User.new(row['id'].to_i, row['name'], row['user_type'], row['email'], row['password'], row['phone']) }.first
+    result = conn.exec_params("SELECT * FROM utilisateur WHERE idUtilisateur = $1", [id])
+    user = result.map { |row| User.new(row['idUtilisateur'].to_i, row['prénom'], row['nom'], row['mail'], row['motDePasse'], row['adresse']) }.first
     conn.close
     user
   end
 
-  def self.update(param)
+  def self.update(id, param)
     conn = connect
-    result = conn.exec("UPDATE users SET name = #{params[:name]}, user_type = #{params[:user_type]}, email = #{params[:email]}, password = #{params[:password]}, phone = #{params[:phone]} WHERE id = #{id} RETURNING id")
-    updated_id = result[0]['id'].to_i
-    user = User.new(updated_id, param['name'], param['user_type'], param['email'], param['password'], param['phone'])
+    result = conn.exec_params("UPDATE utilisateur SET prénom = $1, nom = $2, mail = $3, motDePasse = $4, adresse = $5 WHERE idUtilisateur = $6 RETURNING idUtilisateur", [param[:prenom], param[:nom], param[:mail], param[:motDePasse], param[:adresse], id])
+    updated_id = result[0]['idUtilisateur'].to_i
+    user = User.new(updated_id, param[:prenom], param[:nom], param[:mail], param[:motDePasse], param[:adresse])
     conn.close
     user
   end
 
   def self.delete(id)
     conn = connect
-    conn.exec("DELETE FROM users WHERE id = #{id.to_s}")
+    conn.exec_params("DELETE FROM utilisateur WHERE idUtilisateur = $1", [id])
     conn.close
   end
 end
